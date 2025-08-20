@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
-const port = 3006;
+require("dotenv").config();
+const port = process.env.PORT;
 const route = require("./routes/client/index.route")
+
 const mongoose = require("mongoose")
 mongoose.connect('mongodb://127.0.0.1:27017/productData')
 const Product = mongoose.model('Product', {

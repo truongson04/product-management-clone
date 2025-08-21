@@ -1,3 +1,20 @@
-extends ../../layouts/default
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
 block main 
- h2 This is the product page 
+  div(class="container")
+   div(class="row")
+    div(class="col-12")
+     +box-head("Product-List")
+    
+
+     
+   div(class="row")
+     div(class="col-4 mb-3")
+      div(class="product-item") 
+       div(class="inner-image")
+        img(src="./images/pic.png")
+       div(class="inner-content")
+          h3(class="inner-title") The title
+           div(class="inner-price-new") 20
+           div(class="inner-price-old") 10
+           div(class="inner-price-discount") 10

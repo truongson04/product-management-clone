@@ -9,12 +9,13 @@ block main
 
      
    div(class="row")
+    each items in products 
      div(class="col-4 mb-3")
       div(class="product-item") 
        div(class="inner-image")
-        img(src="./images/pic.png")
+        img(src=items.thumbnail)
        div(class="inner-content")
-          h3(class="inner-title") The title
-           div(class="inner-price-new") 20
-           div(class="inner-price-old") 10
-           div(class="inner-price-discount") 10
+          h3(class="inner-title") #{items.title}
+           div(class="inner-price-new") #{Math.floor(parseFloat(items.price))}$
+           div(class="inner-price-old") #{Math.ceil(parseFloat(items.price)+parseFloat(items.price*parseFloat(items.discountPercentage)/100))} $
+           div(class="inner-price-discount") #{items.discountPercentage}%

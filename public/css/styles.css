@@ -44,7 +44,7 @@ max-width: 100px;
 .inner-content .inner-price-new{
 font-size: 24px; 
 color: green; 
-    
+
 }
 .inner-content .inner-price-old{
     font-size: 24px;
@@ -60,4 +60,7 @@ color: green;
     border: 1px solid transparent;
     border-radius: 20%; 
     font-size: 20px;
+}
+.inner-title{
+    font-size: 15px; 
 }

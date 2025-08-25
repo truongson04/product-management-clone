@@ -1,10 +1,17 @@
 const Product = require("../../models/product.models")
 module.exports.index= async (req, res)=>{
 
-    let find={};
+    let find={
+
+    };
     if(req.query.status){
         find.status = req.query.status
     }
+    let searchingWord="";
+    if(req.query.keyword){
+      searchingWord= req.query.keyword;
+    find.title= new RegExp(searchingWord, "i")
+}
     const productList = await Product.find(find);
   let fillterStatus = [{
     name:"Active",
@@ -30,10 +37,14 @@ else{
     const index = fillterStatus.findIndex((items)=>items.status=="");
     fillterStatus[index].class="active"
 }
+
+
     
     res.render( "admin/pages/products/index.pug", {
         pageTitle: "Product Management",
         products : productList,
-        filterStatus: fillterStatus
+        filterStatus: fillterStatus,
+       inputValue :searchingWord
+       
     })
 }

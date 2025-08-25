@@ -4,9 +4,16 @@ block main
  div(class="card mb-3")
   div(class="card-header") Filter and search 
   div(class="card-body")
-   each items in filterStatus
-    button(class=`btn btn-sm ml-1 btn-outline-success ${items.class}`, button-status=items.status) #{items.name} 
-   
+   div(class="row")
+      div(class="col-6")
+        each items in filterStatus
+         button(class=`btn btn-sm ml-1 btn-outline-success ${items.class}`, button-status=items.status) #{items.name} 
+      div(class="col-6")
+        form(id="form-search")
+         div(class="input-group")
+          input(type="text", placeholder="Type something...", name="keyword", class="form-control", value=inputValue)
+          div(class="input-group-append")
+           button(class="btn btn-success search-btn") Search
  table(class="table table-hover table-sm")
   thead 
    tr  

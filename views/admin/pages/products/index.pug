@@ -1,5 +1,12 @@
 extends ../../layouts/default.pug 
 block main 
+ h1 Products List
+ div(class="card mb-3")
+  div(class="card-header") Filter and search 
+  div(class="card-body")
+   each items in filterStatus
+    button(class=`btn btn-sm ml-1 btn-outline-success ${items.class}`, button-status=items.status) #{items.name} 
+   
  table(class="table table-hover table-sm")
   thead 
    tr  

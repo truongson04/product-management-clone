@@ -12,7 +12,18 @@ module.exports.index= async (req, res)=>{
       searchingWord= req.query.keyword;
     find.title= new RegExp(searchingWord, "i")
 }
-    const productList = await Product.find(find);
+let pagination = {
+  currentPage :1, 
+  limit : 4
+}
+if(req.query.page){
+  pagination.currentPage= parseInt(req.query.page);
+}
+pagination.skip= (pagination.currentPage-1)*pagination.limit;
+const totalProducts = await Product.countDocuments(find);
+let totalPage = Math.ceil(totalProducts/pagination.limit);
+pagination.total = totalPage; 
+    const productList = await Product.find(find).limit(pagination.limit).skip(pagination.skip);
   let fillterStatus = [{
     name:"Active",
     status:"active",
@@ -44,7 +55,8 @@ else{
         pageTitle: "Product Management",
         products : productList,
         filterStatus: fillterStatus,
-       inputValue :searchingWord
+       inputValue :searchingWord,
+       pagination:pagination
        
     })
 }

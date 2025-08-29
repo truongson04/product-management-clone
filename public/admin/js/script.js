@@ -34,4 +34,12 @@ searchButton.addEventListener("click", (e)=>{
 
     
 })
-
+const buttonPagination = document.querySelectorAll("[button-paginaion]");
+buttonPagination.forEach((buttons)=>{
+ buttons.addEventListener("click", ()=>{
+   const currentPage= buttons.getAttribute("button-paginaion");
+   let url= new URL(window.location.href);
+   url.searchParams.set("page", currentPage);
+   window.location.href= url.href;
+ })
+})

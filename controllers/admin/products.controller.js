@@ -1,4 +1,5 @@
 const Product = require("../../models/product.models")
+//Display the list 
 module.exports.index= async (req, res)=>{
 
     let find={
@@ -12,6 +13,7 @@ module.exports.index= async (req, res)=>{
       searchingWord= req.query.keyword;
     find.title= new RegExp(searchingWord, "i")
 }
+//pagination
 let pagination = {
   currentPage :1, 
   limit : 4
@@ -59,4 +61,12 @@ else{
        pagination:pagination
        
     })
+}
+//change the status 
+module.exports.changeStatus= async(req, res)=>{
+ const status = req.params.status;
+ const id = req.params.id;
+ const pageNumber = req.params.page;
+ await Product.updateOne({_id: id}, {status: status});
+  res.redirect(`/admin/products/?page=${pageNumber}`);
 }

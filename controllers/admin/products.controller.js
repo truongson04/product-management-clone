@@ -70,3 +70,21 @@ module.exports.changeStatus= async(req, res)=>{
  await Product.updateOne({_id: id}, {status: status});
   res.redirect(`/admin/products/?page=${pageNumber}`);
 }
+module.exports.changeMulti= async (req, res)=>{
+ const type = req.body.type;
+ const ids = req.body.ids;
+ const page = req.body.page;
+let arr= ids.split(", ");
+ switch(type) {
+ case "active":
+  await Product.updateMany({_id:{$in: arr}},{status:"active"});
+  break;
+ case "inactive":
+  await Product.updateMany({_id:{$in : arr}}, {status: "inactive"});
+  break;
+ default:
+  break;
+ }
+  res.redirect(`/admin/products/?page=${page}`);
+
+}

@@ -4,4 +4,5 @@ const productControllers = require("../../controllers/admin/products.controller"
 router.get("/", productControllers.index);
 router.patch("/change-status/:page/:status/:id", productControllers.changeStatus);
 router.patch("/change-multi", productControllers.changeMulti);
+router.delete("/delete/:page/:id", productControllers.deleteItem);
 module.exports= router;

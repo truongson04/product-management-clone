@@ -3,6 +3,7 @@ const Product = require("../../models/product.models")
 module.exports.index= async (req, res)=>{
 
     let find={
+      deleted : false
 
     };
     if(req.query.status){
@@ -87,4 +88,12 @@ let arr= ids.split(", ");
  }
   res.redirect(`/admin/products/?page=${page}`);
 
+}
+module.exports.deleteItem = async (req, res)=>{
+  const id = req.params.id;
+  const page = req.params.page;
+  await Product.updateOne({_id : id}, {deleted: true,
+     deletedAt : new Date()
+  });
+  res.redirect(`/admin/products?page=${page}`)
 }

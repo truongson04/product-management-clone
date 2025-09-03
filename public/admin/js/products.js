@@ -16,6 +16,7 @@ changeButton.forEach((buttons)=>{
  })
 })
 //change multi-status 
+// in the front-end
 const checkboxMulti = document.querySelector("[check-box-multi]");
 const checkAll = checkboxMulti.querySelector("input[name=checkall]");
 const inputIds = checkboxMulti.querySelectorAll("input[name=id]");
@@ -45,6 +46,7 @@ checkAll.addEventListener("click", ()=>{
  
   
 })
+//in the back-end
 const formChangeMulti = document.querySelector("[form-change-multi]");
 const manyIds = formChangeMulti.querySelector("input[name=ids]");
 
@@ -67,3 +69,19 @@ else{
 }
 
 })
+//delete 
+ const buttonDelete= document.querySelectorAll("[button-delete]");
+ buttonDelete.forEach((button)=>{
+    button.addEventListener("click", ()=>{
+    const isConfirmed = confirm("Do you want to delete this product ???");
+    if(isConfirmed){
+        const id = button.getAttribute("data-id");
+        const formDelete = document.querySelector("#form-delete");
+        const path = formDelete.getAttribute("data-path");
+        const action = `${path}/${id}?_method=DELETE`;
+        formDelete.action = action;
+        formDelete.submit();
+    }
+        
+    })
+ })

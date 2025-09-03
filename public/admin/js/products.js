@@ -46,29 +46,53 @@ checkAll.addEventListener("click", ()=>{
  
   
 })
-//in the back-end
+//in the back-end(delete multi, change-multi, change-position-multi)
 const formChangeMulti = document.querySelector("[form-change-multi]");
 const manyIds = formChangeMulti.querySelector("input[name=ids]");
 
 formChangeMulti.addEventListener("submit", (e)=>{
 e.preventDefault();
 const inputChecked= checkboxMulti.querySelectorAll("input[name=id]:checked");
+const type = e.target.elements.type.value;
 if(inputChecked.length>0){
  let idArray= [];
  inputChecked.forEach((items)=>{
-  idArray.push(items.value);
+    if(type=="change-position"){
+        const position = items.parentElement.parentElement.querySelector("input[name=position]");
+
+       idArray.push(`${items.value}__${position.value}`)
+    }
+    else{
+         idArray.push(items.value);
+    }
+  
+ 
   
 
  })
  manyIds.value= idArray.join(", ");
- formChangeMulti.submit();
+ formChangeMulti.submit()
+ 
 }
 
 else{
     alert("Please select something!!")
 }
+//delete-multi
+
+if(type=="delete-all"){
+    const confirmDelete = confirm("Do you want to delete selected products ??")
+    if(!confirmDelete){
+        return;
+    }
+   
+    formChangeMulti.submit();
+   
+    
+}
 
 })
+
 //delete 
  const buttonDelete= document.querySelectorAll("[button-delete]");
  buttonDelete.forEach((button)=>{

@@ -21,6 +21,8 @@ block main
      select(name="type", class="form-control")
       option(value="active") Active
       option(value="inactive") Inactive
+      option(value="delete-all") Delete All 
+      option(value="change-position") Change Position
     div(class="form-group")
      input(type="text", name="ids", value="", class="form-control d-none")
      input(type="text", name="page", value=pagination.currentPage class="form-control d-none")
@@ -34,6 +36,7 @@ block main
     th Thumbnail 
     th Title 
     th Price 
+    th Position
     th Status 
     th Action 
   tbody 
@@ -46,6 +49,12 @@ block main
     img(src= items.thumbnail, width="100px", height="auto")
    td #{items.title}
    td #{items.price}$
+   td 
+    input(type="number", 
+      value = items.position||1,
+       style = "width : 60px",
+        min=1,
+        name = "position")
    td 
     if(items.status=="active")
      a(href="javascript:;", class="badge badge-success"
@@ -72,7 +81,7 @@ block main
     
         li(class=`page-item ${pagination.currentPage == i ? "active" :""}`)
          button(class="page-link", button-paginaion=i) #{i}
-    li(class=`page-item ${pagination.currentPage==pagination.total  ? "disabled" :""}`)
+    li(class=`page-item ${pagination.currentPage>=pagination.total  ? "disabled" :""}`)
       button(class="page-link", button-paginaion=pagination.currentPage+1) Next  
  form(action="", method="POST", id ="form-change-status", data-path=`/admin/products/change-status/${pagination.currentPage}`) 
  form(action="", method="POST", id ="form-delete", data-path=`/admin/products/delete/${pagination.currentPage}`)

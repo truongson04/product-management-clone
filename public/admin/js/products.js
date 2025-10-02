@@ -109,3 +109,10 @@ if(type=="delete-all"){
         
     })
  })
+ // show alert 
+ const showAlert = document.querySelector("[show-alert]");
+ if(showAlert){
+    setTimeout(()=>{
+        showAlert.classList.add("d-none");
+    }, 5000)
+ }

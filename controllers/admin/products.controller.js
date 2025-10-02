@@ -69,6 +69,7 @@ module.exports.changeStatus = async (req, res) => {
   const id = req.params.id;
   const pageNumber = req.params.page;
   await Product.updateOne({ _id: id }, { status: status });
+  req.flash("success", "Update successfully")
   res.redirect(`/admin/products/?page=${pageNumber}`);
 };
 module.exports.changeMulti = async (req, res) => {
@@ -112,3 +113,28 @@ module.exports.deleteItem = async (req, res) => {
   );
   res.redirect(`/admin/products?page=${page}`);
 };
+//create 
+module.exports.createItem= (req, res)=>{
+res.render("admin/pages/products/create.pug");
+}
+module.exports.createProducts= async(req, res)=>{
+
+if(!req.body.position){
+  const countProduct = await Product.countDocuments();
+  req.body.position= countProduct+1;
+
+}
+req.body.price = parseFloat(req.body.price);
+req.body.discount = parseFloat(req.body.discount);
+req.body.number = parseFloat(req.body.number);
+req.body.thumbnail= `/uploads/${req.file.filename}`;
+
+const newProduct = new Product(req.body);
+await newProduct.save();
+res.redirect("/admin/products")
+
+
+
+console.log(req.body);
+res.send('ok');
+}

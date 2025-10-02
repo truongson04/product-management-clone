@@ -1,6 +1,10 @@
 extends ../../layouts/default.pug 
+include ../../mixins/successAlert.pug
 block main 
+
  h1 Products List
+  +successAlert()
+  
  div(class="card mb-3")
   div(class="card-header") Filter and search 
   div(class="card-body")
@@ -27,6 +31,7 @@ block main
      input(type="text", name="ids", value="", class="form-control d-none")
      input(type="text", name="page", value=pagination.currentPage class="form-control d-none")
     button(type="submit", class="btn btn-primary") Apply
+    a(class="btn btn-outline-success", href="/admin/products/create") +Add new products
  table(class="table table-hover table-sm", check-box-multi)
   thead 
    tr  

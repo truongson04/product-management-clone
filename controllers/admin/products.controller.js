@@ -89,6 +89,7 @@ module.exports.changeMulti = async (req, res) => {
         { _id: { $in: arr } },
         { deleted: true, deletedAt: new Date() }
       );
+      req.flash("success", "Delete successfully");
       break;
     case "change-position":
      for(const items of arr){
@@ -111,6 +112,7 @@ module.exports.deleteItem = async (req, res) => {
     { _id: id },
     { deleted: true, deletedAt: new Date() }
   );
+  req.flash("success", "Deleted Successfully")
   res.redirect(`/admin/products?page=${page}`);
 };
 //create 
@@ -118,6 +120,13 @@ module.exports.createItem= (req, res)=>{
 res.render("admin/pages/products/create.pug");
 }
 module.exports.createProducts= async(req, res)=>{
+  if(!req.body.title){
+     req.flash("error", "Please fill in your title")
+    res.redirect("/admin/products/create")
+   
+    
+    return ;
+  }
 
 if(!req.body.position){
   const countProduct = await Product.countDocuments();
@@ -137,4 +146,68 @@ res.redirect("/admin/products")
 
 console.log(req.body);
 res.send('ok');
+}
+// go to the edit the product page
+module.exports.editItem= async (req, res )=>{
+  try{
+const find = {
+    deleted : false,
+    _id:req.params.id
+  }
+  const product = await Product.findOne(find);
+ 
+   res.render("admin/pages/products/edit", {
+    pageTitle:"Edit the product",
+    product:product
+   })
+  }
+  catch(err){
+    req.flash("error", "The product is not exit")
+    res.redirect("/admin/products")
+  }
+  
+}
+module.exports.editProduct = async (req, res)=>{
+  if(!req.body.title){
+     req.flash("error", "Please fill in your title")
+    res.redirect("/admin/products/create")
+   
+    
+    return ;
+  }
+
+req.body.price = parseFloat(req.body.price);
+req.body.discount = parseFloat(req.body.discount);
+req.body.number = parseFloat(req.body.number);
+if(req.file){
+req.body.thumbnail= `/uploads/${req.file.filename}`;
+}
+
+try{
+await Product.updateOne({_id:req.params.id}, req.body)
+req.flash("success", "Updated successfully")
+}
+catch(err){
+
+}
+
+res.redirect("/admin/products")
+}
+module.exports.getDetails= async (req, res)=>{
+try{
+  const find ={
+    deleted: false,
+    _id: req.params.id
+  }
+  const product = await Product.findOne(find);
+  
+  res.render("admin/pages/products/details", {
+    pageTitle: product.title,
+    product:product
+  })
+ 
+}
+ catch(err){
+    req.flash("err", "Cannot find the product")
+  }
 }

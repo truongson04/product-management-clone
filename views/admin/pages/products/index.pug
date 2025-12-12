@@ -4,6 +4,7 @@ block main
 
  h1 Products List
   +successAlert()
+  +errorAlert()
   
  div(class="card mb-3")
   div(class="card-header") Filter and search 
@@ -72,7 +73,8 @@ block main
        data-id=items.id,
         data-status="inactive") Inactive 
    td 
-    button(class="btn btn-warning btn-sm") Edit
+    a(class="btn btn-secondary btn-sm", href=`/admin/products/details/${items.id}`) Details
+    a(class="btn btn-warning btn-sm", href=`/admin/products/edit/${items.id}`) Edit
     button(class="btn btn-danger btn-sm ml-1",
     button-delete,
     data-id=items.id

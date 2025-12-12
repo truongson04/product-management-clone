@@ -2,10 +2,10 @@ extends ../../layouts/default.pug
 include ../../mixins/successAlert.pug
 block main 
  +errorAlert()
- h1(class="mb-4") Add new product 
+ h1(class="mb-4") Update the  product 
  form(
-    action ="/admin/products/create",
-    id="form-create-product"
+    action =`/admin/products/edit/${product.id}?_method=PATCH`,
+    id="form-edit-product"
     method="POST",
     enctype= "multipart/form-data"
 
@@ -16,13 +16,14 @@ block main
           type='text'
            id='title'
             name='title'
-             required)
+             required
+             value=product.title)
     div(class='form-group')
         label(for='desc') Description 
-        textarea(name="description", class="form-control", id="desc", row="5") 
+        textarea(name="description", class="form-control", id="desc", row="5") #{product.description}
     div(class='form-group')
         label(for='price') Price
-        input(name="price", class="form-control", id="price", type="number") 
+        input(name="price", class="form-control", id="price", type="number" value=product.price) 
     div(class='form-group')
         label(for='discount') Discount
         input(name="discount", class="form-control", id="discount", type="number", min="1") 
@@ -32,16 +33,16 @@ block main
     div(class='form-group' upload-part)
         label(for='thumbnail') Picture
         input(name="thumbnail", class="form-control", id="picture",  type="file", accept="image/*", data-upload-image) 
-        img(src="", data-upload-image-preview)
+        img(src= product.thumbnail, data-upload-image-preview)
     div(class='form-group')
         label(for='position') Position
-        input(name="position", class="form-control", id="position",  type="number", min="1")
+        input(name="position", class="form-control", id="position",  type="number", min="1", value= product.position)
     
     div(class='form-group form-check form-check-inline')
-        label(for='status' class="form-check-label") Active
-        input(name="status", class="form-check-input", id="status", type="radio", value='active')  
+        label(for='status' class="form-check-label" ) Active
+        input(name="status", class="form-check-input", id="status", type="radio", value='active', checked=(product.status=="active" ? true: false))  
     div(class='form-group form-check form-check-inline')
         label(for='status', class="form-check-label") Inactive
-        input(name="status", class="form-check-input", id="status", type="radio", value='inactive')  
-    button(type="submit", class="btn btn-primary") Create
+        input(name="status", class="form-check-input", id="status", type="radio", value='inactive', checked=(product.status=="active" ? true: false))  
+    button(type="submit", class="btn btn-primary") Update
  script(src="/admin/js/createProduct.js")

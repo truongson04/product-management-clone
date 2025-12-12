@@ -1,3 +1,8 @@
 mixin successAlert()
  - if (messages.success)
-    div(class="alert alert-success", show-alert) #{messages.success}
+    div(class="alert alert-success", show-alert) 
+      p #{messages.success}
+mixin errorAlert()
+   - if(messages.error)
+      div(class="alert alert-danger", show-alert) 
+         p #{messages.error}

@@ -1,0 +1,24 @@
+extends ../../layouts/default.pug 
+block main 
+    if(product.title)
+        h1(class="mb-4") #{product.title}
+    if(product.price)
+        div(class="mb-4") Price: #{product.price} $
+    if(product.discountPercentage)
+        div(class="mb-4") Discount #{product.discountPercentage}
+    if(product.stock)
+        div(class="mb-4") Remains : #{product.stock}
+    
+    if(product.thumbnail)
+        div(class="mb-4")
+            img(src=product.thumbnail, style="width: 100px")
+    
+    if(product.position)
+        div(class="mb-4") Position: #{product.position} 
+    if(product.description)
+        div(class="mb-4") #{product.description}
+   
+            
+
+    
+    script(src="/js/script.js")

@@ -197,7 +197,8 @@ module.exports.getDetails= async (req, res)=>{
 try{
   const find ={
     deleted: false,
-    _id: req.params.id
+    _id: req.params.id,
+    status:"active"
   }
   const product = await Product.findOne(find);
   

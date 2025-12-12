@@ -9,3 +9,22 @@ const products =   await Product.find({deleted : false}) .sort({position:"desc"}
 
 
 }
+module.exports.getDetails= async (req, res)=>{
+try{
+  const find ={
+    deleted: false,
+    _id: req.params.id
+  }
+  const product = await Product.findOne(find);
+  
+  res.render("client/pages/products/details", {
+    pageTitle: product.title,
+    product:product
+  })
+ 
+}
+ catch(err){
+    res.redirect("/products")
+  }
+
+}

@@ -15,7 +15,7 @@ block main
        div(class="inner-image")
         img(src=items.thumbnail)
        div(class="inner-content")
-          h3(class="inner-title") #{items.title}
-           div(class="inner-price-new") #{Math.floor(parseFloat(items.price))}$
+          a(class="inner-title", href= `/products/${items.id}`) #{items.title}
+          div(class="inner-price-new") #{Math.floor(parseFloat(items.price))}$
            div(class="inner-price-old") #{Math.ceil(parseFloat(items.price)+parseFloat(items.price*parseFloat(items.discountPercentage)/100))} $
            div(class="inner-price-discount") #{items.discountPercentage}%

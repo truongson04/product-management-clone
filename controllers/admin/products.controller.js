@@ -136,7 +136,7 @@ if(!req.body.position){
 req.body.price = parseFloat(req.body.price);
 req.body.discount = parseFloat(req.body.discount);
 req.body.number = parseFloat(req.body.number);
-req.body.thumbnail= `/uploads/${req.file.filename}`;
+
 
 const newProduct = new Product(req.body);
 await newProduct.save();

@@ -24,8 +24,18 @@ module.exports.index = async (req, res) => {
   const totalProducts = await Product.countDocuments(find);
   let totalPage = Math.ceil(totalProducts / pagination.limit);
   pagination.total = totalPage;
+  //sorting products logic
+  let sort={}
+  if(req.query.sortKey && req.query.sortValue){
+    sort[req.query.sortKey]= req.query.sortValue
+
+  }
+  else{
+  sort.position="desc";
+  }
+
   const productList = await Product.find(find)
-    .sort({position:"desc"})
+    .sort(sort)
     .limit(pagination.limit)
     .skip(pagination.skip);
   let fillterStatus = [

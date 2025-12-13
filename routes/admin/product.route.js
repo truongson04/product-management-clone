@@ -25,6 +25,6 @@ router.delete("/delete/:page/:id", productControllers.deleteItem);
 router.get('/create', productControllers.createItem)
 router.post("/create", upload.single("thumbnail") , uploadCloud.upload, productControllers.createProducts)
 router.get("/edit/:id", productControllers.editItem);
-router.patch("/edit/:id", upload.single("thumbnail"),productControllers.editProduct)
+router.patch("/edit/:id", upload.single("thumbnail"), uploadCloud.upload,productControllers.editProduct)
 router.get("/details/:id", productControllers.getDetails);
 module.exports= router;

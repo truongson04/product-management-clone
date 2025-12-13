@@ -1,5 +1,6 @@
 extends ../../layouts/default.pug 
 include ../../mixins/successAlert.pug
+include ../../mixins/sort.pug
 block main 
 
  h1 Products List
@@ -19,20 +20,26 @@ block main
           input(type="text", placeholder="Type something...", name="keyword", class="form-control", value=inputValue)
           div(class="input-group-append")
            button(class="btn btn-success search-btn") Search
- div(class="card-body")
-  form(action=`/admin/products/change-multi?_method=PATCH`, method="POST", form-change-multi) 
-   div(class="d-flex align-items-start")
-    div(class="form-group")
-     select(name="type", class="form-control")
-      option(value="active") Active
-      option(value="inactive") Inactive
-      option(value="delete-all") Delete All 
-      option(value="change-position") Change Position
-    div(class="form-group")
-     input(type="text", name="ids", value="", class="form-control d-none")
-     input(type="text", name="page", value=pagination.currentPage class="form-control d-none")
-    button(type="submit", class="btn btn-primary") Apply
-    a(class="btn btn-outline-success", href="/admin/products/create") +Add new products
+  div(class="card-body")
+    form(action=`/admin/products/change-multi?_method=PATCH`, method="POST", form-change-multi) 
+    div(class="d-flex align-items-start")
+      div(class="form-group")
+      select(name="type", class="form-control")
+        option(value="active") Active
+        option(value="inactive") Inactive
+        option(value="delete-all") Delete All 
+        option(value="change-position") Change Position
+      div(class="form-group")
+      input(type="text", name="ids", value="", class="form-control d-none")
+      input(type="text", name="page", value=pagination.currentPage class="form-control d-none")
+      button(type="submit", class="btn btn-primary") Apply
+      a(class="btn btn-outline-success", href="/admin/products/create") +Add new products
+  div(class="card mb-3")
+    div(class="card-header") Order
+    div(class="card-body")
+      div(class="row")
+        div(class="row-4")
+         +sort()
  table(class="table table-hover table-sm", check-box-multi)
   thead 
    tr  

@@ -43,3 +43,32 @@ buttonPagination.forEach((buttons)=>{
    window.location.href= url.href;
  })
 })
+//sorting logic 
+const sort = document.querySelector("[sort]");
+const selectSort= sort.querySelector("select");
+const sortClear = document.querySelector("[sort-clear]")
+console.log(sortClear)
+selectSort.addEventListener("change", (e)=>{
+    let sortKeyValue= e.target.value.split("-");
+    let url= new URL(window.location.href);
+    url.searchParams.set("sortKey", sortKeyValue[0]);
+    url.searchParams.set("sortValue", sortKeyValue[1]);
+    window.location.href= url.href;
+
+})
+sortClear.addEventListener("click", ()=>{
+    let url= new URL(window.location.href);
+    url.searchParams.delete("sortKey");
+    url.searchParams.delete("sortValue");
+    window.location.href= url.href;
+})
+// sủa front end thêm selected cho option của select khi sort
+let url = new URL(window.location.href);
+const sortKey = url.searchParams.get("sortKey");
+const sortValue = url.searchParams.get("sortValue");
+if(sortKey && sortValue){
+    const sortKeyAndValue= sortKey+"-"+sortValue;
+    const selectedOption = sort.querySelector(`option[value=${sortKeyAndValue}]`);
+    selectedOption.setAttribute("selected", "true");
+
+}

@@ -1,0 +1,56 @@
+mixin table-tree(list, level=1)
+     each items, index in list
+        - const prefix = Array(level + 1).join(" -- ")
+                tr
+                    td
+                        input(type="checkbox", name="id", value=items.id)
+
+                    td #{index + 1}
+
+                    td
+                        img(
+                            src=items.thumbnail,
+                            width="100px",
+                            height="auto"
+                        )
+
+                    td #{prefix} #{items.title}
+
+                    td
+                        input(
+                            type="number",
+                            name="position",
+                            value=items.position || 1,
+                            min=1,
+                            style="width: 60px"
+                        )
+
+                    td
+                        if items.status == "active"
+                            a.badge.badge-success(
+                                href="javascript:;",
+                                button-change-status,
+                                data-id=items.id,
+                                data-status="active"
+                            ) Active
+                        else
+                            a.badge.badge-danger(
+                                href="javascript:;",
+                                button-change-status,
+                                data-id=items.id,
+                                data-status="inactive"
+                            ) Inactive
+
+                    td
+                        a.btn.btn-secondary.btn-sm(
+                            href=`/admin/product-category/details/${items.id}`
+                        ) Details
+                        a.btn.btn-warning.btn-sm(
+                            href=`/admin/product-category/edit/${items.id}`
+                        ) Edit
+                        button.btn.btn-danger.btn-sm.ml-1(
+                            button-delete,
+                            data-id=items.id
+                        ) Delete
+        if(items.children && items.children.length>0)
+            +table-tree(items.children, level + 1)

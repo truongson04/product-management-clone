@@ -1,5 +1,6 @@
 extends ../../layouts/default.pug 
 include ../../mixins/successAlert.pug 
+include ../../mixins/select-tree.pug
 block main 
     h1 Add new product's category 
     +errorAlert()
@@ -8,8 +9,12 @@ block main
             label(for="title") Title 
             input(type="text", class="form-control", id="title", name="title", required)
         div(class="form-group")
-            label(for="parent_id") Parents category 
-            input(type="text", class="form-control", id="parent_id", name="parent_id")
+          label(for="parent_id") Parent's category 
+          select(name="parent_id", id="parent_id", class="form-control")
+            option(value="") ---Choose category---
+            if(list)
+                +select-tree(list)
+
         div(class="form-group")
             label(for="desc") Description 
             textarea(name="description", type="text", class="form-control", id="desc", rows="5", textarea-mce)

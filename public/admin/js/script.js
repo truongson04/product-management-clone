@@ -47,7 +47,7 @@ buttonPagination.forEach((buttons)=>{
 const sort = document.querySelector("[sort]");
 const selectSort= sort.querySelector("select");
 const sortClear = document.querySelector("[sort-clear]")
-console.log(sortClear)
+
 selectSort.addEventListener("change", (e)=>{
     let sortKeyValue= e.target.value.split("-");
     let url= new URL(window.location.href);

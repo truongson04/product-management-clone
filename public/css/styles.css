@@ -64,3 +64,271 @@ color: green;
 .inner-title{
     font-size: 15px; 
 }
+/* Container của Card */
+.product-card {
+  background: #fff;
+  border-radius: 12px; 
+  border: 1px solid #eee;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  height: 100%; 
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); 
+  border-color: #bce3c9; 
+}
+
+
+.product-thumb {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; 
+  overflow: hidden;
+}
+
+.product-thumb img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-thumb img {
+  transform: scale(1.05); 
+}
+
+
+.badge-discount {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ff4d4f; /* Màu đỏ nổi bật */
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  z-index: 2;
+}
+
+
+.product-content {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+
+.product-title a {
+  font-size: 1rem;
+  color: #253D4E;
+  font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 10px;
+  display: block;
+  
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.2s;
+}
+
+.product-title a:hover {
+  color: #3BB77E; 
+}
+
+/* Khu vực giá */
+.product-price {
+  margin-top: auto; 
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.price-new {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #3BB77E; /* Màu giá nổi bật */
+}
+
+.price-old {
+  font-size: 0.9rem;
+  color: #adadad;
+  text-decoration: line-through;
+}
+
+
+.btn-add-cart {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  background-color: #e8f6ea;
+  color: #3BB77E;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-add-cart:hover {
+  background-color: #3BB77E;
+  color: #fff;
+}
+/* Container chung */
+.product-detail-container {
+  background-color: #fff;
+}
+
+
+.breadcrumb-item a {
+  text-decoration: none;
+  color: #6c757d;
+}
+.breadcrumb-item.active {
+  color: #333;
+  font-weight: 500;
+}
+
+
+.main-image-box {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 10px;
+}
+.main-image-box img {
+  max-height: 200px;
+  object-fit: contain; 
+  width: 100%;
+}
+
+.thumbnail-list {
+  overflow-x: auto;
+}
+.thumb-item {
+  width: 80px;
+  height: 80px;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  cursor: pointer;
+  overflow: hidden;
+  opacity: 0.6;
+  transition: all 0.2s;
+}
+.thumb-item.active, .thumb-item:hover {
+  border-color: #3BB77E; 
+  opacity: 1;
+}
+.thumb-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Thông tin sản phẩm */
+.product-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #253D4E;
+  line-height: 1.2;
+}
+
+
+.price-block {
+  background-color: #f4f6fa !important; /* Màu nền nhẹ cho giá */
+}
+.current-price {
+  color: #3BB77E !important;
+  font-size: 2.5rem; /* Giá to nổi bật */
+}
+
+
+.quantity-selector input {
+  border-left: 0;
+  border-right: 0;
+  font-weight: bold;
+}
+.quantity-selector .btn {
+  border-color: #ced4da;
+}
+
+
+.btn-buy {
+  background-color: #3BB77E;
+  border-color: #3BB77E;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s;
+}
+.btn-buy:hover {
+  background-color: #2da56d;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(59, 183, 126, 0.4);
+}
+
+/* Tinh chỉnh ảnh sản phẩm */
+.product-image-wrapper img {
+  width: 100%;
+  height: auto;
+  object-fit: contain; /* Đảm bảo ảnh thấy trọn vẹn */
+  background: #fff;
+  border: 1px solid #f1f1f1;
+  border-radius: 12px !important; /* Bo góc mềm mại */
+}
+
+/* Tiêu đề */
+.product-title {
+  color: #2c3e50;
+  letter-spacing: -0.5px;
+}
+
+/* Khu vực giá */
+.current-price {
+  color: #0d6efd; /* Màu xanh chuẩn Bootstrap hoặc màu brand của bạn */
+}
+.original-price {
+  font-size: 0.9rem;
+}
+
+/* Input số lượng: Xóa mũi tên mặc định của input number */
+.quantity-wrapper input[type=number]::-webkit-inner-spin-button, 
+.quantity-wrapper input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+.quantity-wrapper input {
+  font-weight: 600;
+  background-color: #fff;
+}
+.quantity-wrapper button {
+  font-weight: bold;
+  color: #555;
+}
+.quantity-wrapper button:hover {
+  background-color: #e9ecef;
+}
+
+/* Nút thêm giỏ hàng */
+.btn-add-cart {
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.btn-add-cart:hover {
+  transform: translateY(-2px); /* Hiệu ứng nhấc nút lên khi hover */
+  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3) !important;
+}

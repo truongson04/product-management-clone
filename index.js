@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require("path");
 const flash = require('express-flash')
 const methodOverride = require('method-override')
 const cookieParser= require("cookie-parser")
@@ -19,7 +20,9 @@ app.use(bodyParser.urlencoded({extended:false}))
   app.use(flash());
 app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
-app.use(express.static(`${__dirname}/public`))
+app.use(express.static(path.join(__dirname, 'public')));
+//Tinymce 
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 route(app);
 routeAdmin(app);
 

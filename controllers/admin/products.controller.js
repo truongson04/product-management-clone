@@ -206,9 +206,7 @@ res.redirect("/admin/products")
 module.exports.getDetails= async (req, res)=>{
 try{
   const find ={
-    deleted: false,
     _id: req.params.id,
-    status:"active"
   }
   const product = await Product.findOne(find);
   
@@ -219,6 +217,7 @@ try{
  
 }
  catch(err){
-    req.flash("err", "Cannot find the product")
+    req.flash("error", "Cannot find the product")
+    res.redirect("/admin/products")
   }
 }

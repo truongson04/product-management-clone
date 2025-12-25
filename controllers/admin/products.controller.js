@@ -172,10 +172,13 @@ const find = {
     _id:req.params.id
   }
   const product = await Product.findOne(find);
+  const categoryList = await productCategory.find({deleted:false});
+  const newRecords = helper.createTree(categoryList);
  
    res.render("admin/pages/products/edit", {
     pageTitle:"Edit the product",
-    product:product
+    product:product, 
+    list : newRecords
    })
   }
   catch(err){

@@ -39,3 +39,32 @@ module.exports.createCategory = async (req, res)=>{
    res.redirect("/admin/product-category");
    
 }
+module.exports.getEditCategory= async (req, res)=>{
+    try{
+           const id = req.params.id;
+    const category = await productCategory.findOne({_id:id, deleted:false});
+    const records = await productCategory.find({deleted:false});
+    const treeList = helper.createTree(records);
+    
+
+res.render("admin/pages/product-category/edit.pug", {
+    pageTitle: "Edit the category",
+    category:category,
+    list: treeList
+})
+
+    }
+    catch(err){
+        req.flash("error", "Something went wrong !");
+        res.redirect("/admin/product-category")
+    }
+ 
+}
+module.exports.editCategory= async (req, res)=>{
+    const id = req.params.id
+    req.body.position = parseInt(req.body.position);
+    await productCategory.updateOne({_id: id}, req.body);
+    req.flash("success", "Update successfully !")
+
+  res.redirect("/admin/product-category")
+}

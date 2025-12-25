@@ -1,5 +1,6 @@
 extends ../../layouts/default.pug
 include ../../mixins/successAlert.pug
+include ../../mixins/select-tree.pug
 block main 
  +errorAlert()
  h1(class="mb-4") Add new product 
@@ -17,6 +18,12 @@ block main
            id='title'
             name='title'
              required)
+    div(class="form-group")
+        label(for="product_category_id") Category
+        select(name="product_category_id", id="product_category_id", class="form-control")
+            option(value="") --Select Category--
+            if(list)
+                +select-tree(list)
     div(class='form-group')
         label(for='desc') Description 
         textarea(name="description", class="form-control", id="desc", row="5") 

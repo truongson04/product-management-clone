@@ -9,5 +9,7 @@ const productCategoryController = require("../../controllers/admin/productCatego
 router.get("/", productCategoryController.index);
 router.get("/create", productCategoryController.getCreate);
 router.post("/create", upload.single("thumbnail") , uploadCloud.upload,productCategoryController.createCategory);
+router.get("/edit/:id", productCategoryController.getEditCategory);
+router.patch("/edit/:id", upload.single("thumbnail") , uploadCloud.upload, productCategoryController.editCategory)
 
 module.exports= router;

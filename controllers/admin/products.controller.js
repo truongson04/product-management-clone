@@ -1,4 +1,6 @@
 const Product = require("../../models/product.models");
+const helper = require("../../helper/createTree");
+const productCategory = require("../../models/product-category.model");
 //Display the list
 module.exports.index = async (req, res) => {
   let find = {
@@ -126,8 +128,13 @@ module.exports.deleteItem = async (req, res) => {
   res.redirect(`/admin/products?page=${page}`);
 };
 //create 
-module.exports.createItem= (req, res)=>{
-res.render("admin/pages/products/create.pug");
+module.exports.createItem= async (req, res)=>{
+  const categoryList = await productCategory.find({deleted:false});
+  const newRecords = helper.createTree(categoryList);
+res.render("admin/pages/products/create.pug", {
+  pageTitle:"Create new product",
+  list: newRecords
+});
 }
 module.exports.createProducts= async(req, res)=>{
   if(!req.body.title){

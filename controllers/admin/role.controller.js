@@ -16,3 +16,36 @@ module.exports.createRole= async (req, res)=>{
  roles.save();
  res.redirect("/admin/roles")
 }
+module.exports.getEdit = async(req, res)=>{
+    try{
+        const id = req.params.id;
+ let find ={
+    _id:id,
+    deleted:false
+ }
+ const role = await Roles.findOne(find)
+
+ res.render("admin/pages/roles/edit.pug", {
+    pageTitle:"Edit role", 
+    data:role
+ });
+
+    }
+    catch(err){
+      res.redirect("/admin/roles")
+    }
+ 
+}
+module.exports.editRole= async (req, res)=>{
+  try{
+  const id = req.params.id;
+
+ await Roles.updateOne({_id:id}, req.body);
+  req.flash("success", "Update successfully")
+ res.redirect("/admin/roles")
+  }
+  catch(err){
+    req.flash("error", 'Something went wrong')
+   res.redirect("/admin/roles")
+  }
+}

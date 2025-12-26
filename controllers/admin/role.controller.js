@@ -49,3 +49,22 @@ module.exports.editRole= async (req, res)=>{
    res.redirect("/admin/roles")
   }
 }
+module.exports.getPermission = async(req, res)=>{
+    let find ={
+        deleted:false
+    }
+    const role = await Roles.find(find);
+    res.render("admin/pages/roles/permission", {
+        pageTitle:"Permission assignment",
+        records:role
+    })
+}
+module.exports.updatePermissions = async (req, res)=>{
+
+const permissions = JSON.parse(req.body.permissions);
+permissions.forEach( async (items)=>{
+    await Roles.updateOne({_id:items.id}, {permissions: items.permissions});
+})
+req.flash("success", "Update successfully !");
+res.redirect("/admin/roles/permission");
+}
